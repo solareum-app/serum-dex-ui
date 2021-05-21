@@ -2,9 +2,9 @@ import Wallet from '@project-serum/sol-wallet-adapter';
 import { notify } from '../../utils/notifications';
 
 export function SolareumAdapter(_, network) {
-  const solareum = (window as any).solareum;
-  if (solareum) {
-    return new Wallet(solareum, network);
+  const solana = (window as any).solana;
+  if (solana) {
+    return new Wallet(solana, network);
   }
 
   return {
