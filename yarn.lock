@@ -1523,10 +1523,10 @@
     bn.js "^5.1.2"
     buffer-layout "^1.2.0"
 
-"@project-serum/sol-wallet-adapter@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@project-serum/sol-wallet-adapter/-/sol-wallet-adapter-0.2.0.tgz#e1fa5508bf13110429bf26e10b818182015f2161"
-  integrity sha512-ed7wZwlDqjF88VCq7eHVO8njHqdUkBxBL8WEVOnB47ooLO4btOJt6GBdkKpKqKX86c86LiEROJclcdW8e7kIjg==
+"@project-serum/sol-wallet-adapter@npm:@solareum/sol-wallet-adapter@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@solareum/sol-wallet-adapter/-/sol-wallet-adapter-0.2.2.tgz#eff1cc18d6f3c98079782a20f75673780f632bf2"
+  integrity sha512-vPwvIoEzd7vqXMa3GWwFStjNJrExI5mGmaYV8Z+dEpHG8FqUycuabCLD2Ub01GCYIzmuzcvmrBHUdtm2IBU8pw==
   dependencies:
     bs58 "^4.0.1"
     eventemitter3 "^4.0.4"

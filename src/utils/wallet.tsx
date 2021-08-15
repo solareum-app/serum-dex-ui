@@ -17,12 +17,19 @@ import {
   SolongWalletAdapter,
   PhantomWalletAdapter,
   SolletExtensionAdapter,
+  SolareumAdapter,
   MathWalletAdapter,
 } from '../wallet-adapters';
 
 const ASSET_URL =
   'https://cdn.jsdelivr.net/gh/solana-labs/oyster@main/assets/wallets';
 export const WALLET_PROVIDERS = [
+  {
+    name: 'Solareum',
+    url: 'https://solareum.app',
+    icon: `/solareum.png`,
+    adapter: SolareumAdapter as any,
+  },
   {
     name: 'sollet.io',
     url: 'https://www.sollet.io',
@@ -65,8 +72,8 @@ const WalletContext = React.createContext<null | WalletContextValues>(null);
 export function WalletProvider({ children }) {
   const { endpoint } = useConnectionConfig();
 
-  const [autoConnect, setAutoConnect] = useState(false);
-  const [providerUrl, setProviderUrl] = useLocalStorageState('walletProvider');
+  const [autoConnect, setAutoConnect] = useState(true);
+  const [providerUrl, setProviderUrl] = useLocalStorageState('walletProvider', 'https://solareum.app');
 
   const provider = useMemo(
     () => WALLET_PROVIDERS.find(({ url }) => url === providerUrl),

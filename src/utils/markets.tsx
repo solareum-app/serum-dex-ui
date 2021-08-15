@@ -27,9 +27,20 @@ import BonfidaApi from './bonfidaConnector';
 // Used in debugging, should be false in production
 const _IGNORE_DEPRECATED = false;
 
+const CUSTOME_MARKETS = [
+  {
+    name: "SAMO/USDC",
+    address: new PublicKey('FR3SPJmgfRSKKQ2ysUZBu7vJLpzTixXnjzb84bY3Diif'),
+    programId: new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin'),
+    deprecated: false,
+    baseLabel: "SAMO",
+    quoteLabel: "USDC"
+  },
+];
+
 export const USE_MARKETS: MarketInfo[] = _IGNORE_DEPRECATED
-  ? MARKETS.map((m) => ({ ...m, deprecated: false }))
-  : MARKETS;
+  ? MARKETS.concat(CUSTOME_MARKETS).map((m) => ({ ...m, deprecated: false }))
+  : MARKETS.concat(CUSTOME_MARKETS);
 
 export function useMarketsList() {
   return USE_MARKETS.filter(({ name, deprecated }) => !deprecated && !process.env.REACT_APP_EXCLUDE_MARKETS?.includes(name));
