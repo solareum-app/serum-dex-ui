@@ -14,7 +14,6 @@ import { Button, Modal } from 'antd';
 import {
   WalletAdapter,
   LedgerWalletAdapter,
-  SolongWalletAdapter,
   PhantomWalletAdapter,
   SolletExtensionAdapter,
   SolareumAdapter,
@@ -48,12 +47,6 @@ export const WALLET_PROVIDERS = [
     adapter: LedgerWalletAdapter,
   },
   {
-    name: 'Solong',
-    url: 'https://www.solong.com',
-    icon: `${ASSET_URL}/solong.png`,
-    adapter: SolongWalletAdapter,
-  },
-  {
     name: 'Phantom',
     url: 'https://www.phantom.app',
     icon: `https://www.phantom.app/img/logo.png`,
@@ -64,7 +57,7 @@ export const WALLET_PROVIDERS = [
     url: 'https://www.mathwallet.org',
     icon: `${ASSET_URL}/mathwallet.svg`,
     adapter: MathWalletAdapter,
-  }
+  },
 ];
 
 const WalletContext = React.createContext<null | WalletContextValues>(null);
@@ -80,7 +73,7 @@ export function WalletProvider({ children }) {
     [providerUrl],
   );
 
-  let [wallet, setWallet] = useState<WalletAdapter|undefined>(undefined);
+  let [wallet, setWallet] = useState<WalletAdapter | undefined>(undefined);
 
   useEffect(() => {
     if (provider) {
@@ -92,7 +85,7 @@ export function WalletProvider({ children }) {
           endpoint,
         ) as WalletAdapter;
         setWallet(wallet);
-      }
+      };
 
       if (document.readyState !== 'complete') {
         // wait to ensure that browser extensions are loaded
