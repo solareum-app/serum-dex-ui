@@ -39,7 +39,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 16px 16px;
+
   .borderNone .ant-select-selector {
     border: none !important;
   }

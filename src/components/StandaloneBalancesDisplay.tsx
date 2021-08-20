@@ -170,19 +170,19 @@ export default function StandaloneBalancesDisplay() {
     string,
     string | undefined,
   ][] = [
-    [
-      baseCurrency,
-      baseCurrencyBalances,
-      'base',
-      market?.baseMintAddress.toBase58(),
-    ],
-    [
-      quoteCurrency,
-      quoteCurrencyBalances,
-      'quote',
-      market?.quoteMintAddress.toBase58(),
-    ],
-  ];
+      [
+        baseCurrency,
+        baseCurrencyBalances,
+        'base',
+        market?.baseMintAddress.toBase58(),
+      ],
+      [
+        quoteCurrency,
+        quoteCurrencyBalances,
+        'quote',
+        market?.quoteMintAddress.toBase58(),
+      ],
+    ];
 
   return (
     <FloatingElement style={{ flex: 1, paddingTop: 10 }}>
@@ -230,7 +230,7 @@ export default function StandaloneBalancesDisplay() {
               <Col>{balances && balances.unsettled}</Col>
             </RowBox>
             <RowBox align="middle" justify="space-around">
-              <Col style={{ width: 150 }}>
+              <Col style={{ width: 150, display: 'none' }}>
                 <ActionButton
                   block
                   size="large"
@@ -245,7 +245,7 @@ export default function StandaloneBalancesDisplay() {
                 </ActionButton>
               </Col>
             </RowBox>
-            <Tip>
+            <Tip style={{ display: 'none' }}>
               All deposits go to your{' '}
               <Link external to={providerUrl}>
                 {providerName}

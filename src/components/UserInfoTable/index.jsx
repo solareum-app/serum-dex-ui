@@ -1,20 +1,27 @@
+import styled from 'styled-components';
+
 import BalancesTable from './BalancesTable';
 import OpenOrderTable from './OpenOrderTable';
 import React from 'react';
-import { Tabs, Typography } from 'antd';
+import { Typography } from 'antd';
 import FillsTable from './FillsTable';
 import FloatingElement from '../layout/FloatingElement';
 import FeesTable from './FeesTable';
 import { useOpenOrders, useBalances, useMarket } from '../../utils/markets';
 
 const { Paragraph } = Typography;
-const { TabPane } = Tabs;
+
+const Section = styled.div`
+  margin-bottom: 36px;
+  width: '100%';
+  overflow-x: 'scroll';
+`;
 
 export default function Index() {
   const { market } = useMarket();
   return (
     <FloatingElement style={{ flex: 1, paddingTop: 20 }}>
-      <Typography>
+      <Typography style={{ display: 'none' }}>
         <Paragraph style={{ color: 'rgba(255,255,255,0.5)' }}>
           Make sure to go to Balances and click Settle to send out your funds.
         </Paragraph>
@@ -24,9 +31,33 @@ export default function Index() {
           other tokens from FTX.{' '}
         </Paragraph>
       </Typography>
-      <Tabs defaultActiveKey="orders">
-        <TabPane tab="Open Orders" key="orders">
+
+      <div>
+        <Section>
           <OpenOrdersTab />
+        </Section>
+
+        <Section>
+          <h3 className="sectionTitle">Recent Trade</h3>
+          <FillsTable />
+        </Section>
+
+        <Section>
+          <h3 className="sectionTitle">Balances</h3>
+          <BalancesTab />
+        </Section>
+
+        {market && market.supportsSrmFeeDiscounts ? (
+          <Section>
+            <h3 className="sectionTitle">Fee discounts</h3>
+            <FeesTable />
+          </Section>
+        ) : null}
+      </div>
+
+      {/* <Tabs defaultActiveKey="orders">
+        <TabPane tab="Open Orders" key="orders">
+        <OpenOrdersTab />
         </TabPane>
         <TabPane tab="Recent Trade History" key="fills">
           <FillsTable />
@@ -39,7 +70,7 @@ export default function Index() {
             <FeesTable />
           </TabPane>
         ) : null}
-      </Tabs>
+      </Tabs> */}
     </FloatingElement>
   );
 }
