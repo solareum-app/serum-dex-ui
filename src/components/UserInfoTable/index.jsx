@@ -1,24 +1,20 @@
-import styled from 'styled-components';
-
 import BalancesTable from './BalancesTable';
 import OpenOrderTable from './OpenOrderTable';
 import React from 'react';
 import { Typography } from 'antd';
 import FillsTable from './FillsTable';
 import FloatingElement from '../layout/FloatingElement';
-import FeesTable from './FeesTable';
-import { useOpenOrders, useBalances, useMarket } from '../../utils/markets';
+import {
+  useOpenOrders,
+  useBalances /* useMarket */,
+} from '../../utils/markets';
+// import FeesTable from './FeesTable';
 
 const { Paragraph } = Typography;
 
-const Section = styled.div`
-  margin-bottom: 36px;
-  width: '100%';
-  overflow-x: 'scroll';
-`;
-
 export default function Index() {
-  const { market } = useMarket();
+  // const { market } = useMarket();
+
   return (
     <FloatingElement style={{ flex: 1, paddingTop: 20 }}>
       <Typography style={{ display: 'none' }}>
@@ -33,44 +29,17 @@ export default function Index() {
       </Typography>
 
       <div>
-        <Section>
-          <OpenOrdersTab />
-        </Section>
+        <OpenOrdersTab />
+        <FillsTable />
+        <BalancesTab />
 
-        <Section>
-          <h3 className="sectionTitle">Recent Trade</h3>
-          <FillsTable />
-        </Section>
-
-        <Section>
-          <h3 className="sectionTitle">Balances</h3>
-          <BalancesTab />
-        </Section>
-
-        {market && market.supportsSrmFeeDiscounts ? (
+        {/* market && market.supportsSrmFeeDiscounts ? (
           <Section>
             <h3 className="sectionTitle">Fee discounts</h3>
             <FeesTable />
           </Section>
-        ) : null}
+        ) : null */}
       </div>
-
-      {/* <Tabs defaultActiveKey="orders">
-        <TabPane tab="Open Orders" key="orders">
-        <OpenOrdersTab />
-        </TabPane>
-        <TabPane tab="Recent Trade History" key="fills">
-          <FillsTable />
-        </TabPane>
-        <TabPane tab="Balances" key="balances">
-          <BalancesTab />
-        </TabPane>
-        {market && market.supportsSrmFeeDiscounts ? (
-          <TabPane tab="Fee discounts" key="fees">
-            <FeesTable />
-          </TabPane>
-        ) : null}
-      </Tabs> */}
     </FloatingElement>
   );
 }

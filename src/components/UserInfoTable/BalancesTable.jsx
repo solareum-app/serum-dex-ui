@@ -4,12 +4,12 @@ import {
   useTokenAccounts,
   getSelectedTokenAccountForMint,
 } from '../../utils/markets';
-import DataTable from '../layout/DataTable';
 import { useSendConnection } from '../../utils/connection';
 import { useWallet } from '../../utils/wallet';
 import { settleFunds } from '../../utils/send';
 import { notify } from '../../utils/notifications';
 import { useReferrer } from '../../utils/referrer';
+import { Section, Item } from './Table';
 
 export default function BalancesTable({
   balances,
@@ -51,57 +51,48 @@ export default function BalancesTable({
     onSettleSuccess && onSettleSuccess();
   }
 
-  const columns = [
-    showMarket
-      ? {
-          title: 'Market',
-          dataIndex: 'marketName',
-          key: 'marketName',
-        }
-      : null,
-    {
-      title: 'Coin',
-      dataIndex: 'coin',
-      key: 'coin',
-    },
-    hideWalletBalance
-      ? null
-      : {
-          title: 'Wallet Balance',
-          dataIndex: 'wallet',
-          key: 'wallet',
-        },
-    {
-      title: 'Orders',
-      dataIndex: 'orders',
-      key: 'orders',
-    },
-    {
-      title: 'Unsettled',
-      dataIndex: 'unsettled',
-      key: 'unsettled',
-    },
-    {
-      key: 'action',
-      render: ({ market, openOrders, marketName }) => (
-        <div style={{ textAlign: 'right' }}>
-          <Button
-            ghost
-            style={{ marginRight: 12 }}
-            onClick={() => onSettleFunds(market, openOrders)}
-          >
-            Settle {marketName}
-          </Button>
-        </div>
-      ),
-    },
-  ].filter((x) => x);
   return (
-    <DataTable
-      emptyLabel="No balances"
-      dataSource={balances}
-      columns={columns}
-      pagination={false}
-    />
+    <Section>
+      <h3 className="title">Balances</h3>
+      {balances.map((i) => (
+        <Item key={i.coin}>
+          {showMarket ? (
+            <div className="itemRow">
+              <div className="label">Market</div>
+              <div className="value">{i.marketName}</div>
+            </div>
+          ) : null}
+          <div className="itemRow">
+            <div className="label">Coin</div>
+            <div className="value">{i.coin}</div>
+          </div>
+          {!hideWalletBalance ? (
+            <div className="itemRow">
+              <div className="label">Wallet Balance</div>
+              <div className="value">{i.wallet}</div>
+            </div>
+          ) : null}
+          <div className="itemRow">
+            <div className="label">Orders</div>
+            <div className="value">{i.orders}</div>
+          </div>
+          <div className="itemRow">
+            <div className="label">Unsettled</div>
+            <div className="value">{i.unsettled}</div>
+          </div>
+          <div className="itemRow">
+            <div className="label"></div>
+            <div className="value">
+              <Button
+                ghost
+                onClick={() => onSettleFunds(i.market, i.openOrders)}
+              >
+                Settle {i.marketName}
+              </Button>
+            </div>
+          </div>
+        </Item>
+      ))}
+    </Section>
   );
 }
