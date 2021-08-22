@@ -37,10 +37,10 @@ export const Item = styled.div`
     font-weight: bold;
 
     &.buy {
-      color: #ff0000;
+      color: #22c38e;
     }
     &.sell {
-      color: #22c38e;
+      color: #ff0000;
     }
   }
 `;
